@@ -66,6 +66,7 @@ console.log("Servidor rodando em http://localhost:3000");
 */
 
 const http = require("http");
+const cardapio = require("./data/cardapio");
 
 const server = http.createServer((req, res) => {
 
@@ -88,12 +89,12 @@ const server = http.createServer((req, res) => {
     } else if (req.url === "/cardapio") {
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
-
+/*
         const cardapio = [
             { "pizza": "calabresa", "preco": 35 },
             { "pizza": "frango", "preco": 38 }
         ];
-
+*/
         res.end(JSON.stringify(cardapio));
 
     }
