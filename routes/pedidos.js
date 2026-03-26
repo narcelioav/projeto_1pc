@@ -1,8 +1,7 @@
 const express = require("express");
-
 const router = express.Router();
 
-const pedidos = [];
+/*const pedidos = [];
 
 router.get("/", (req, res) => {
     res.json(pedidos);
@@ -21,6 +20,11 @@ router.post("/", (req, res) => {
         mensagem: "Pedido criado!",
         pedido: novoPedido
     });
-});
+});*/
 
-module.express = router;
+const pedidosController = require("../controllers/pedidosController");
+
+router.get("/", pedidosController.listarPedidos);
+router.post("/", pedidosController.criarPedido);
+
+module.exports = router;
