@@ -5,3 +5,9 @@ const cardapio = [
 ];
 
 module.exports = cardapio;
+
+/*module.exports = [
+    { nome: "Calabresa", preco: 30 },
+    { nome: "Mussarela", preco: 28 },
+    { nome: "Frango com Catupiry", preco: 35 }
+];*/
