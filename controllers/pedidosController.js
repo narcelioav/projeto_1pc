@@ -1,5 +1,6 @@
 const pedidos = [];
 const cardapio = require("../data/cardapio");
+const db = require("../config/database");
 
 exports.listarPedidos = (req, res) => {
     res.json(pedidos);
@@ -71,16 +72,58 @@ exports.criarPedido = (req, res) => {
          total: pizzaEncontrada.preco
      };*/
 
-    const novoPedido = {
-        id: pedidos.length + 1,
-        itens: itensProcessados,
-        total: totalPedido
-    };
+    // 🟢 Inserir pedido
+    db.run(
+        "INSERT INTO pedidos (total) VALUES (?)",
+        [totalPedido],
+        function (err) {
 
-    pedidos.push(novoPedido);
+            if (err) {
+                return res.status(500).json({ erro: "Erro ao salvar pedido" });
+            }
 
-    res.status(201).json({
-        mensagem: "Pedido criado com sucesso!",
-        pedido: novoPedido
-    });
+            const pedidoId = this.lastID;
+
+            // 🟢 Inserir itens
+            const stmt = db.prepare(`
+                INSERT INTO itens_pedido 
+                (pedido_id, pizza, quantidade, preco, subtotal)
+                VALUES (?, ?, ?, ?, ?)
+            `);
+
+            itensProcessados.forEach(item => {
+                stmt.run(
+                    pedidoId,
+                    item.pizza,
+                    item.quantidade,
+                    item.preco,
+                    item.subtotal
+                );
+            });
+
+            stmt.finalize();
+
+            res.status(201).json({
+                mensagem: "Pedido salvo no banco!",
+                pedido: {
+                    id: pedidoId,
+                    itens: itensProcessados,
+                    total: totalPedido
+                }
+            });
+        }
+    );
+
+    /* const novoPedido = {
+         id: pedidos.length + 1,
+         itens: itensProcessados,
+         total: totalPedido
+     };
+ 
+     pedidos.push(novoPedido);
+ 
+     res.status(201).json({
+         mensagem: "Pedido criado com sucesso!",
+         pedido: novoPedido
+     });*/
 };

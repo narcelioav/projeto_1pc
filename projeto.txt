@@ -58,4 +58,28 @@ Quer ir para:
 🤖 Começar bot de WhatsApp
 💳 Gerar PIX automático
 
+🍕 Integração com cardápio + preço
+E o sistema vai:
+
+✔ Buscar a pizza no seu cardapio
+✔ Validar se existe
+✔ Pegar o preço automaticamente
+✔ Calcular total
+
+📌 Depois disso (visão do que vem)
+
+Só pra você já ir visualizando o projeto crescendo:
+
+🍕 Cardápio dinâmico (amanhã)
+💾 Banco de dados (SQLite ou MongoDB)
+🤖 Bot WhatsApp
+💳 PIX automático
+📊 Painel admin (faturamento, mais vendidas)
+
+👉 Isso aqui já é base de SaaS (ZapPizza 👀)
+
+
+
+
+
 
