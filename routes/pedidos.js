@@ -26,5 +26,7 @@ const pedidosController = require("../controllers/pedidosController");
 
 router.get("/", pedidosController.listarPedidos);
 router.post("/", pedidosController.criarPedido);
+router.get("/faturamento", pedidosController.faturamentoTotal);
+router.get("/mais-vendidas", pedidosController.pizzasMaisVendidas);
 
 module.exports = router;

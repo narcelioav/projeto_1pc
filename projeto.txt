@@ -79,6 +79,10 @@ Só pra você já ir visualizando o projeto crescendo:
 👉 Isso aqui já é base de SaaS (ZapPizza 👀)
 
 
+teste do banco sqlite:
+
+Invoke-RestMethod -Method POST -Uri "http://localhost:3000/pedidos" -Headers @{ "Content-Type" = "application/json" } -Body '{"itens":[{"pizza":"calabresa","quantidade":2},{"pizza":"frango","quantidade":1}]}'
+
 
 
 

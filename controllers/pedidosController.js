@@ -2,8 +2,78 @@ const pedidos = [];
 const cardapio = require("../data/cardapio");
 const db = require("../config/database");
 
-exports.listarPedidos = (req, res) => {
+/*exports.listarPedidos = (req, res) => {
     res.json(pedidos);
+};*/
+
+exports.listarPedidos = (req, res) => {
+
+    db.all("SELECT * FROM pedidos", [], (err, pedidos) => {
+        if (err) {
+            return res.status(500).json({ erro: "Erro ao buscar pedidos" });
+        }
+
+        if (pedidos.length === 0) {
+            return res.json([]);
+        }
+
+        // Para cada pedido, busca itens
+        const pedidosComItens = [];
+
+        let processados = 0;
+
+        pedidos.forEach((pedido, index) => {
+            db.all(
+                "SELECT pizza, quantidade, preco, subtotal FROM itens_pedido WHERE pedido_id = ?",
+                [pedido.id],
+                (err, itens) => {
+
+                    pedidosComItens[index] = {
+                        id: pedido.id,
+                        itens,
+                        total: pedido.total
+                    };
+
+                    processados++;
+
+                    if (processados === pedidos.length) {
+                        res.json(pedidosComItens);
+                    }
+                }
+            );
+        });
+    });
+};
+
+exports.faturamentoTotal = (req, res) => {
+
+    db.get("SELECT SUM(total) as total FROM pedidos", [], (err, result) => {
+
+        if (err) {
+            return res.status(500).json({ erro: "Erro ao calcular faturamento" });
+        }
+
+        res.json({
+            faturamento: result.total || 0
+        });
+    });
+};
+
+exports.pizzasMaisVendidas = (req, res) => {
+
+    db.all(`
+        SELECT pizza, SUM(quantidade) as total_vendido
+        FROM itens_pedido
+        GROUP BY pizza
+        ORDER BY total_vendido DESC
+    `, [], (err, rows) => {
+
+        if (err) {
+            return res.status(500).json({ erro: "Erro ao buscar dados" });
+        }
+
+        res.json(rows);
+    });
 };
 
 exports.criarPedido = (req, res) => {
