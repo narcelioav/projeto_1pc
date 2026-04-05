@@ -23,6 +23,7 @@ fetch("http://localhost:3000/pedidos")
     .then(res => res.json())
     .then(data => {
         const lista = document.getElementById("pedidos");
+        lista.innerHTML = "";
 
         data.forEach(pedido => {
             const li = document.createElement("li");

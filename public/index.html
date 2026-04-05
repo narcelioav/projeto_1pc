@@ -4,20 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Painel Pizzaria</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <h1>🍕 Painel da Pizzaria</h1>
 
-    <h2>💰 Faturamento Total</h2>
-    <p id="faturamento">Carregando...</p>
+    <div class="container">
 
-    <h2>🍕 Pizzas Mais Vendidas</h2>
-    <ul id="maisVendidas"></ul>
+        <div class="card">
+            <h2>💰 Faturamento</h2>
+            <p id="faturamento">Carregando...</p>
+        </div>
 
-    <h2>📋 Pedidos</h2>
-    <ul id="pedidos"></ul>
+        <div class="card">
+            <h2>🍕 Mais Vendidas</h2>
+            <ul id="maisVendidas"></ul>
+        </div>
+
+        <div class="card">
+            <h2>📋 Pedidos</h2>
+            <ul id="pedidos"></ul>
+        </div>
+
+    </div>
 
     <script src="script.js"></script>
 

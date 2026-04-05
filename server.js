@@ -198,8 +198,12 @@ const cardapio = require("./data/cardapio");
 app.use(express.json());
 app.use(express.static("public")); // 👈 AQUI
 
-app.get("/", (req, res) => {
+/*app.get("/", (req, res) => {
     res.send("API da Pizzaria Narcelio funcionando!");
+});*/
+
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/public/index.html");
 });
 
 app.get("/cardapio", (req, res) => {
