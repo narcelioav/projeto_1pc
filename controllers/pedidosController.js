@@ -76,6 +76,23 @@ exports.pizzasMaisVendidas = (req, res) => {
     });
 };
 
+exports.faturamentoPorDia = (req, res) => {
+
+    db.all(`
+        SELECT DATE(data) as dia, SUM(total) as total
+        FROM pedidos
+        GROUP BY DATE(data)
+        ORDER BY dia DESC
+    `, [], (err, rows) => {
+
+        if (err) {
+            return res.status(500).json({ erro: "Erro ao calcular faturamento por dia" });
+        }
+
+        res.json(rows);
+    });
+};
+
 exports.criarPedido = (req, res) => {
 
     const { itens } = req.body;

@@ -8,10 +8,18 @@ const db = new sqlite3.Database("./database.sqlite", (err) => {
     }
 
 
-    db.run(`
+    /*db.run(`
     CREATE TABLE IF NOT EXISTS pedidos (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         total REAL
+    )
+`);*/
+
+db.run(`
+    CREATE TABLE IF NOT EXISTS pedidos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        total REAL,
+        data DATETIME DEFAULT CURRENT_TIMESTAMP
     )
 `);
 

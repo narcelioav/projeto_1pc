@@ -1,7 +1,7 @@
-const express = require("express");
+/*const express = require("express");
 const router = express.Router();
 
-/*const pedidos = [];
+const pedidos = [];
 
 router.get("/", (req, res) => {
     res.json(pedidos);
@@ -16,11 +16,14 @@ router.post("/", (req, res) => {
 
     pedidos.push(novoPedido);
 
-    res.status(201).json({
+    res.status(201).json({kk
         mensagem: "Pedido criado!",
         pedido: novoPedido
     });
 });*/
+
+const express = require("express");
+const router = express.Router();
 
 const pedidosController = require("../controllers/pedidosController");
 
@@ -28,5 +31,6 @@ router.get("/", pedidosController.listarPedidos);
 router.post("/", pedidosController.criarPedido);
 router.get("/faturamento", pedidosController.faturamentoTotal);
 router.get("/mais-vendidas", pedidosController.pizzasMaisVendidas);
+router.get("/faturamento-dia", pedidosController.faturamentoPorDia);
 
 module.exports = router;
