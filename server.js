@@ -196,6 +196,7 @@ const pedidosRoute = require("./routes/pedidos");
 const cardapio = require("./data/cardapio");
 
 app.use(express.json());
+app.use(express.static("public")); // 👈 AQUI
 
 app.get("/", (req, res) => {
     res.send("API da Pizzaria Narcelio funcionando!");
