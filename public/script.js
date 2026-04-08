@@ -1,4 +1,7 @@
-// 🔥 Faturamento
+// 🔄 Função para carregar tudo
+function carregarDados() {
+    
+    // 🔥 Faturamento
 fetch("http://localhost:3000/pedidos/faturamento")
     .then(res => res.json())
     .then(data => {
@@ -31,3 +34,10 @@ fetch("http://localhost:3000/pedidos")
             lista.appendChild(li);
         });
     });
+}
+
+// 🚀 roda na primeira vez
+carregarDados();
+
+// 🔁 atualiza a cada 5 segundos
+setInterval(carregarDados, 5000);
