@@ -32,5 +32,6 @@ router.post("/", pedidosController.criarPedido);
 router.get("/faturamento", pedidosController.faturamentoTotal);
 router.get("/mais-vendidas", pedidosController.pizzasMaisVendidas);
 router.get("/faturamento-dia", pedidosController.faturamentoPorDia);
+router.get("/faturamento-data", pedidosController.faturamentoPorData);
 
 module.exports = router;

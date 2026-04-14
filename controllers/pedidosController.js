@@ -93,6 +93,27 @@ exports.faturamentoPorDia = (req, res) => {
     });
 };
 
+exports.faturamentoPorData = (req, res) => {
+
+    const { data } = req.query;
+
+    db.get(`
+        SELECT SUM(total) as total
+        FROM pedidos
+        WHERE DATE(data) = ?
+    `, [data], (err, result) => {
+
+        if (err) {
+            return res.status(500).json({ erro: "Erro ao buscar faturamento por data" });
+        }
+
+        res.json({
+            data,
+            total: result.total || 0
+        });
+    });
+};
+
 exports.criarPedido = (req, res) => {
 
     const { itens } = req.body;
@@ -214,3 +235,4 @@ exports.criarPedido = (req, res) => {
          pedido: novoPedido
      });*/
 };
+
